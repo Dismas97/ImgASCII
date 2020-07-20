@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1595225954 source:/home/francisco/Documentos/Proyectos/ImgASCII/main.cpp
+	<iostream>
+	<SFML/Graphics.hpp>
+	<fstream>
+
