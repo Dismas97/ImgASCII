@@ -18,8 +18,15 @@ void setTam(sf::Image img,int *ancho, int *alto){
     (*alto) = img.getSize().y;
 }
 
+char getCharMap(string mapa, sf::Color pixel){
+    int tam = mapa.length();
+    int escalado = (pixel.b*0.0722+pixel.r*0.2126 + pixel.g*0.7152)*tam;
+    escalado/=255;
+    return mapa[tam-escalado];
+}
+
 int main(){
-    int ancho, alto, aux;
+    int ancho, alto;
     string pathImagen,pathArchivo, escribir = "", mapa=" .,:;ox%#@";
     ofstream archivo;
     sf::Image imagen;
@@ -34,10 +41,7 @@ int main(){
 
     for(int y=0; y<alto; y++){
         for(int x=0; x<ancho; x++){
-            pixel = imagen.getPixel(x,y);
-            aux = (pixel.r + pixel.g + pixel.b)*10;
-            aux/=765;
-            escribir+=mapa[10-aux];
+            escribir+=getCharMap(mapa,imagen.getPixel(x,y));
         }
         escribir+='\n';
     }
