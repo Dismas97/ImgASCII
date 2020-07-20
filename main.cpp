@@ -2,23 +2,20 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 
+using namespace std;
+using namespace sf;
+
+
 void limpiarBuffer(){
     while (getchar() != '\n' && getchar() != EOF);
 }
-using namespace std;
 
-sf::Image getImagen(string path){
-    sf::Image imagen;
-    imagen.loadFromFile(path);
-    return imagen;
-}
-
-void setTam(sf::Image img,int *ancho, int *alto){
+void setTam(Image img,int *ancho, int *alto){
     (*ancho) = img.getSize().x;
     (*alto) = img.getSize().y;
 }
 
-char getCharMap(string mapa, sf::Color pixel){
+char getCharMap(string mapa, Color pixel){
     int tam = mapa.length();
     int escalado = (pixel.b*0.0722+pixel.r*0.2126 + pixel.g*0.7152)*tam;
     escalado/=255;
@@ -27,29 +24,30 @@ char getCharMap(string mapa, sf::Color pixel){
 
 int main(){
     int ancho, alto;
-    string pathImagen,pathArchivo, escribir = "", mapa=" .,:;ox%#@";
+    Image imagen;
+    Color pixel;
+    string pathImagen,escribir,pathArchivo, mapa=" .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
     ofstream archivo;
-    sf::Image imagen;
-    sf::Color pixel;
+
     cout<< "Path imagen"<<endl;
     cin >> pathImagen;
-    limpiarBuffer();
-    cout<< "Path Texto"<<endl;
-    cin>>pathArchivo;
-    imagen = getImagen(pathImagen);
+
+    imagen.loadFromFile(pathImagen);
+    pathArchivo=pathImagen.substr(0,pathImagen.length()-4);
+    pathArchivo+=".txt";
+    archivo.open(pathArchivo);
     setTam(imagen,&ancho,&alto);
+    limpiarBuffer();
 
     for(int y=0; y<alto; y++){
+        escribir="";
         for(int x=0; x<ancho; x++){
             escribir+=getCharMap(mapa,imagen.getPixel(x,y));
         }
-        escribir+='\n';
+        archivo<<escribir<<endl;
     }
-    archivo.open(pathArchivo);
-    archivo << escribir;
     archivo.close();
-    cout<<"Archivo generado con exito\n Presione cualquier tecla para salir"<<endl;
-    limpiarBuffer();
+    cout<<"Archivo generado con exito\nPresione cualquier tecla para salir"<<endl;
     getchar();
     return 0;
 }
