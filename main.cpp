@@ -5,10 +5,6 @@
 using namespace std;
 using namespace sf;
 
-/**
-@author Dismas
-**/
-
 void limpiarBuffer(){
     while (getchar() != '\n' && getchar() != EOF);
 }
@@ -31,13 +27,14 @@ int main(){
     string pathImagen,escribir,pathArchivo;
     string mapa;
     ofstream archivo;
-    cout<<"Cantidad de caracteres:\n(1) 10 (2) 70 (3) 96\n";
+    cout<<"Cantidad de caracteres:\n(1) 9 (2) 10 (3) 11 (4) 70 (5) 96\n";
     int cant;
     cin>>cant;
     switch(cant){
-        case 1: mapa = "@#*+=;:-. "; break;
-        case 2: mapa = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "; break;
-        case 3: mapa = "@MBHENR#KWXDFPQASUZbdehx*8Gm&04LOVYkpq5Tagns69owz$CIu23Jcfry%1v7l+it[] {}?j|()=~!-/<>\\\"^_';,:`. "; break;
+        case 1: mapa = "@#£=+|:. ";break;
+        case 2: mapa = "@#*+=;:-. "; break;
+        case 3: mapa = "@#$%&8BMW* ";break;
+        case 4: mapa = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "; break;
         default: mapa = "@MBHENR#KWXDFPQASUZbdehx*8Gm&04LOVYkpq5Tagns69owz$CIu23Jcfry%1v7l+it[] {}?j|()=~!-/<>\\\"^_';,:`. ";
     }
 
